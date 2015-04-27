@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     else
       @errors = @user.errors.full_messages
       render "new"
+    end
   end
 
   private

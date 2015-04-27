@@ -20,18 +20,18 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @user = User.find(session[:user_id])
-    @user.posts << @post
-    if @user.save
+    @user = User.find_by(id: session[:user_id])
+
+    if @user.posts << @post
       redirect_to posts_path
     else
-      @errors = @user.errors.full_messages
+      @errors = @post.errors.full_messages
       render "new"
     end
   end
 
   def show
-    @post = Post.find(post_params)
+    @post = Post.find_by(id: params[:id])
     render "show"
   end
 
@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
-      redirect_to post_path(@post)
+      redirect_to @post
     else
       @errors = @post.errors.full_messages
       render "edit"
@@ -69,8 +69,10 @@ class PostsController < ApplicationController
     @scope ||= params[:user_id] ? Post.where(author: params[:user_id]) : Post
   end
 
-  def post_params
-    params.require(:post).permit(:title, :body)
-  end
+  private
+
+    def post_params
+      params.require(:post).permit(:title, :body)
+    end
 
 end
