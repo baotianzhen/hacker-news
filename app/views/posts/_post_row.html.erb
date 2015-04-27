@@ -1,0 +1,14 @@
+<article id="<%= post.id %>">
+  <h2><a href="<%= post_path(post) %>"><%= post.title %></a></h2>
+  <p>
+    <span class="user"><a href="<%= user_posts_path(post.author) %>"><%= post.author.username %></span>
+    <span class="time-since-creation"><%= post.time_since_creation %> hours ago</span>
+  </p>
+  <p>
+    <%= post.body %>
+    <span><a href="<%= edit_post_path(post) %>">[edit]</a></span>
+  </p>
+  <p>
+    <a href="#">link here</a>
+  </p>
+</article>
