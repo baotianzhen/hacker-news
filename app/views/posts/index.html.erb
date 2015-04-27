@@ -1,0 +1,5 @@
+<div class="post-container">
+  <% @posts.each do |current_post| %>
+    <%= render partial: "post_row", locals: { post: current_post } %>
+  <% end %>
+</div>
