@@ -18,14 +18,14 @@ ActiveRecord::Schema.define(version: 20150427203227) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "author_id"
-    t.integer  "post_id"
-    t.integer  "parent_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
     t.string   "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["parent_id"], name: "index_comments_on_parent_id", using: :btree
+  add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.integer  "author_id"

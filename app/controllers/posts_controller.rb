@@ -59,6 +59,7 @@ class PostsController < ApplicationController
   def destroy
     @user = User.find(session[:user_id])
     @post = Post.find(params[:id])
+    puts @user.id == @post.author.id
     @post.destroy if @user.id == @post.author.id
     redirect_to user_posts_path(@user)
   end
